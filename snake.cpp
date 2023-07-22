@@ -2,14 +2,14 @@
 #include <iostream>
 #include <stdlib.h>
 #include <conio.h>
-//using namespace std;
+using namespace std;
  
 #define ARRIBA 72  //numeros asociados a las flechas
 #define IZQUIERDA 75
 #define DERECHA 77
 #define ABAJO 80
 #define ESC 27
- 
+
 int cuerpo[200][2]; //j i matriz para las coordenadas x 2 y 200 
 int n = 1, tam = 10, dir = 3; // ,forma en que guardaa el cuerpo
 int x = 10, y = 12; //posicion inical
@@ -20,7 +20,7 @@ char tecla;
 
 void gotoxy(int x, int y) //funcion que posiciona el cursor
 { 
- HANDLE hCon; 
+ HANDLE hCon;
  COORD dwPos; 
  
  dwPos.X = x; 
@@ -28,6 +28,50 @@ void gotoxy(int x, int y) //funcion que posiciona el cursor
  hCon = GetStdHandle(STD_OUTPUT_HANDLE); 
  SetConsoleCursorPosition(hCon,dwPos); 
 }
+
+void portada(){
+        system("cls");
+        int c=24,f=79,r;
+        char t=178;
+        for(int i=0 ; i<f ; i++){
+                gotoxy(i,0);
+                cout<<t;
+                gotoxy(i,c);
+                cout<<t;
+        }
+        for(int i=0 ; i<=c ; i++){
+                gotoxy(0,i);
+                cout<<t;
+                gotoxy(f,i);
+                cout<<t;
+        }
+        string snkd[]={"         ....oooooo....    ","     .',;;:o:000000',0. ","    .:  ......ldl````````dloo:.",
+                " .,  ,ldd, ;c  dl  okxxo:  ';l:.",".,  ;dxkx, cd  dl  dOkxxxl..'l;",";  ;dxkkk, cx  ko  x0Okkxxooocl",
+                ";  ,:cclx; ;c  kd  xK0kxl00000l",",      :d; .,,:0d  xK0Oo,     o ",";  ;ddxkk, l0KKXo  x0Okkddl  ,0",
+                ",'  oxxkx, l0K00o  dOOkxxd;  0"," ,'  ldxd, cOOOOl  okkxxo;  :0","  ,'   lo, ckkxkc  okxo:   :o",
+                "    ..   .......,,,......:::","      ```'oooooooooooo:::","......';;',;:cc:,'..."};
+                
+        r=2;
+        for(int i=0;i<14;i++){
+                gotoxy(20,r);
+                r++;
+                cout<<snkd[i]<<endl;
+        }
+        
+        string snkl[]={"                     __     ","   _________  ____ _/ /_____","  / ___/ __ \\/ __ `/ //_/ _ \\",
+        " (__  ) / / / /_/ / ,< /  __/","/____/_/ /_/\\__,_/_/|_|\\___/"};
+        for(int i=0;i<5;i++){
+                gotoxy(22,r);
+                r++;
+                cout<<snkl[i]<<endl;
+        }
+        gotoxy(23,23);
+        cout<<"Precione ENTER para empezar";
+        system("pause>dsdsd");
+}
+ 
+
+
 
 void OcultaCursor() {
  CONSOLE_CURSOR_INFO cci = {100, FALSE};
@@ -110,16 +154,19 @@ void cambiar_velocidad(){
 
 
 
+
 int main()
 {
  OcultaCursor();
+
+ portada();
  
  pintar();
  gotoxy(xc, yc); printf("%c", 4);
+
  
  while(tecla != ESC && game_over())
  {
-
  borrar_cuerpo();
  guardar_posicion();
  dibujar_cuerpo();
